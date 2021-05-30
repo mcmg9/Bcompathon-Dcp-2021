@@ -9,4 +9,4 @@ Note: these were made using v3 of dcp, if you need to run it with updated dcp, r
 
 install bitcoin-miner: npm install bitcoin-miner
 
-run: node index.js
+run: node index.js | node testBitcoinMiner.js | node noMining.js
