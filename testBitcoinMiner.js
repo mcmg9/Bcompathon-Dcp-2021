@@ -12,26 +12,8 @@ let nonce = 45291990 // initial nonce
 
 const miner = new BTCMiner(block);
 
-const data = [];
-var i;
-var j;
-for(i = 0; i < 10; i++){
-  var data2 = [];
-  for(j = 0; j < 10000; j++){
-      var temp = {num:nonce+j, miner2:miner};
-      data2[j] = temp;
-  }
-  data.push(data2);
-  nonce += 10000;
-}
-
-var i;
-for(i = 0; i < 10; i++){
-    console.log(data[i][0].num);
-}
-
 // Calculate the target based on current dificulty for this block (block.bits)
-const target = data[0][0].miner2.getTarget();
+const target = miner.getTarget();
 console.log('The target for this block is:');
 console.log(target.toString('hex'));
 
@@ -40,8 +22,8 @@ let found = false;
 
 console.log('\n[Start Mining with initial nonce:', nonce, ']');
 while (nonce < (45291990+10000) && !found) { // check the next 1000 nonces starting from 45291990
-    hash = data[0][0].miner2.getHash(nonce);
-    found = data[0][0].miner2.checkHash(hash);
+    hash = miner.getHash(nonce);
+    found = miner.checkHash(hash);
     console.log(hash.toString('hex'), nonce, found ? '<- nonce FOUND!!' : '');
     if (found) {
         miner.verifyNonce(block, nonce);
